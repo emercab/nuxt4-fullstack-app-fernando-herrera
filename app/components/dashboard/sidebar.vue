@@ -22,8 +22,14 @@
         exact: false,
       },
       {
-        label: 'Contacts',
+        label: 'Usuarios',
         icon: 'i-lucide-users',
+        to: '/dashboard/users',
+        exact: false,
+      },
+      {
+        label: 'Contacts',
+        icon: 'i-lucide-contact-round',
       },
       {
         label: 'Settings',

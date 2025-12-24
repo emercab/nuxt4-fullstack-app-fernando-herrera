@@ -1,75 +1,40 @@
-# Nuxt Minimal Starter
+# Mi sitio con Nuxt 4
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Este es un ejemplo de un proyecto de un sitio web full stack creado con Nuxt 4.
 
-## Setup
+## Instalación
 
-Make sure to install dependencies:
+1. Clona este repositorio:
 
 ```bash
-# npm
-npm install
+git clone
+```
 
-# pnpm
+2. Navega al directorio del proyecto:
+
+```bash
+cd mi-sitio-nuxt4
+```
+
+3. Instala las dependencias:
+
+```bash
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+4. Configura las variables de entorno:
+   Modifica el archivo `.env_template` con la configuración de la base de datos y renómbralo a `.env`.
 
-Start the development server on `http://localhost:3000`:
+5. Ejecuta el comando `npx prisma migrate dev` para crear las tablas en la base de datos.
+
+6. Ejecuta el seeder para poblar la base de datos con datos iniciales:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+pnpm run seed
 ```
 
-## Production
-
-Build the application for production:
+7. Inicia el servidor de desarrollo:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+pnpm run dev
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

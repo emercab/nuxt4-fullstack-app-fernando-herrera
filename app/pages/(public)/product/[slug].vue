@@ -10,7 +10,7 @@
       name: 'Cloud Storage Pro',
       description:
         'Servicio de almacenamiento en la nube seguro y escalable para empresas de cualquier tamaño.',
-      price: 100,
+      price: 320000,
       images: [
         'https://picsum.photos/600/400?random=1',
         'https://picsum.photos/600/400?random=2',
@@ -24,7 +24,7 @@
       name: 'IT Support 24/7',
       description:
         'Soporte técnico y gestión integral de infraestructura TI, disponible las 24 horas, todos los días.',
-      price: 200,
+      price: 410000,
       images: [
         'https://picsum.photos/600/400?random=4',
         'https://picsum.photos/600/400?random=5',
@@ -38,7 +38,7 @@
       name: 'CyberSecurity Suite',
       description:
         'Solución completa de ciberseguridad con protección contra amenazas avanzadas, firewall y análisis de vulnerabilidades.',
-      price: 300,
+      price: 570000,
       images: [
         'https://picsum.photos/600/400?random=7',
         'https://picsum.photos/600/400?random=8',
@@ -52,13 +52,41 @@
       name: 'Plataforma Chatbot IA',
       description:
         'Plataforma inteligente para la creación y gestión de chatbots con inteligencia artificial para servicio al cliente.',
-      price: 400,
+      price: 400000,
       images: [
         'https://picsum.photos/600/400?random=10',
         'https://picsum.photos/600/400?random=11',
         'https://picsum.photos/600/400?random=12',
       ],
       tags: ['IA', 'chatbot', 'automatización', 'servicio al cliente'],
+    },
+    {
+      id: '5',
+      slug: 'project-management-software',
+      name: 'Project Management Pro',
+      description:
+        'Software de gestión de proyectos colaborativo con seguimiento de tareas, cronogramas y análisis de rendimiento.',
+      price: 850000,
+      images: [
+        'https://picsum.photos/600/400?random=13',
+        'https://picsum.photos/600/400?random=14',
+        'https://picsum.photos/600/400?random=15',
+      ],
+      tags: ['gestión de proyectos', 'colaboración', 'tareas', 'rendimiento'],
+    },
+    {
+      id: '6',
+      slug: 'virtualization-solutions',
+      name: 'Virtualization Solutions',
+      description:
+        'Soluciones de virtualización de servidores y escritorios para optimizar recursos y reducir costos operativos.',
+      price: 620000,
+      images: [
+        'https://picsum.photos/600/400?random=16',
+        'https://picsum.photos/600/400?random=17',
+        'https://picsum.photos/600/400?random=18',
+      ],
+      tags: ['virtualización', 'servidores', 'escritorios', 'optimización'],
     },
   ]);
 
@@ -167,7 +195,7 @@
 
         <!-- Description -->
         <div>
-          <h2 class="text-lg font-semibold mb-2">Descripción</h2>
+          <h2 class="text-lg font-semibold mb-2 text-primary-300">Descripción</h2>
           <p class="leading-relaxed">
             {{ product.description }}
           </p>
