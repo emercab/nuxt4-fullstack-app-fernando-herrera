@@ -1,6 +1,8 @@
 import 'dotenv/config';
+import bcrypt from 'bcryptjs';
 import { prisma } from '../../server/utils/db';
 import { faker } from '@faker-js/faker';
+import { usersFake } from './users-fake';
 import { productsFake } from './products-fake';
 
 const seedDatabase = async () => {
@@ -8,6 +10,7 @@ const seedDatabase = async () => {
   console.log('Purgando datos antiguos...');
   await prisma.siteReview.deleteMany();
   await prisma.product.deleteMany();
+  await prisma.user.deleteMany();
 
   // 2. Sembrar datos ficticios de reviews
   console.log('Creando datos ficticios...');
@@ -24,6 +27,14 @@ const seedDatabase = async () => {
     { count: 50 }
   );
 
+  // Hash de constraseñas
+  const usersWithHashedPassword = usersFake.map((user) => {
+    return {
+      ...user,
+      password: bcrypt.hashSync(user.password, bcrypt.genSaltSync(10)),
+    };
+  });
+
   // 3. Insertar datos en la base de datos
   console.log('Sembrando datos en la base de datos...');
   await prisma.siteReview.createMany({
@@ -33,6 +44,10 @@ const seedDatabase = async () => {
 
   await prisma.product.createMany({
     data: productsFake,
+  });
+
+  await prisma.user.createMany({
+    data: usersWithHashedPassword,
   });
 
   console.log('Database seeded successfully.');

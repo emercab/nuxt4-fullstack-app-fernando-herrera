@@ -11,6 +11,7 @@ export default defineEventHandler(async (event) => {
   if (limit > 50) limit = 50; // Enforce a maximum limit for performance
   if (isNaN(offset) || offset < 0) offset = 0;
 
+  // Fetch products and total count from the database simultaneously
   const [products, total] = await Promise.all([
     prisma.product.findMany({
       take: limit,

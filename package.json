@@ -18,8 +18,10 @@
     "@nuxt/ui": "^4.2.1",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
+    "bcryptjs": "^3.0.3",
     "eslint": "^9.39.1",
     "nuxt": "^4.2.2",
+    "nuxt-auth-utils": "0.5.26",
     "pg": "^8.16.3",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.25",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
+    "@iconify-json/lucide": "^1.2.82",
     "@types/pg": "^8.16.0",
     "dotenv": "^17.2.3",
     "prisma": "^7.2.0",

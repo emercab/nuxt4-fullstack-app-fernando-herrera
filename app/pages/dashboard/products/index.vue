@@ -4,99 +4,67 @@
 
   const UBadge = resolveComponent('UBadge');
 
-  type Payment = {
-    id: string;
-    date: string;
-    status: 'paid' | 'failed' | 'refunded';
-    email: string;
-    amount: number;
-  };
+  const { products, total, currentPage, perPage } = await usePaginatedProducts();
 
-  const data = ref<Payment[]>([
-    {
-      id: '4600',
-      date: '2024-03-11T15:30:00',
-      status: 'paid',
-      email: 'james.anderson@example.com',
-      amount: 594000,
-    },
-    {
-      id: '4599',
-      date: '2024-03-11T10:10:00',
-      status: 'failed',
-      email: 'mia.white@example.com',
-      amount: 276000,
-    },
-    {
-      id: '4598',
-      date: '2024-03-11T08:50:00',
-      status: 'refunded',
-      email: 'william.brown@example.com',
-      amount: 3150000,
-    },
-    {
-      id: '4597',
-      date: '2024-03-10T19:45:00',
-      status: 'paid',
-      email: 'emma.davis@example.com',
-      amount: 529000,
-    },
-    {
-      id: '4596',
-      date: '2024-03-10T15:55:00',
-      status: 'paid',
-      email: 'ethan.harris@example.com',
-      amount: 639500,
-    },
-  ]);
-
-  const columns: TableColumn<Payment>[] = [
+  const columns: TableColumn<Product>[] = [
     {
       accessorKey: 'id',
       header: '#',
       cell: ({ row }) => `#${row.getValue('id')}`,
     },
     {
-      accessorKey: 'date',
-      header: 'Date',
+      accessorKey: 'images',
+      header: 'Imagen',
       cell: ({ row }) => {
-        return new Date(row.getValue('date')).toLocaleString('es-CO', {
-          day: 'numeric',
-          month: 'short',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true,
+        const images = row.getValue('images') as string[];
+        return h('img', {
+          src: images[0],
+          alt: row.getValue('name'),
+          class: 'w-12 h-12 object-cover rounded',
         });
       },
     },
     {
-      accessorKey: 'status',
-      header: 'Status',
+      accessorKey: 'name',
+      header: 'Nombre',
+    },
+    {
+      accessorKey: 'description',
+      header: 'Descripción',
       cell: ({ row }) => {
-        const color = {
-          paid: 'success' as const,
-          failed: 'error' as const,
-          refunded: 'neutral' as const,
-        }[row.getValue('status') as string];
-        return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-          row.getValue('status')
+        return h(
+          'div',
+          { class: 'whitespace-normal line-clamp-3 max-w-xs' },
+          row.getValue('description') as string
         );
       },
     },
     {
-      accessorKey: 'email',
-      header: 'Email',
+      accessorKey: 'price',
+      header: 'Precio',
+      cell: ({ row }) => {
+        const price = formatCurrency(row.getValue('price'));
+        return h('div', { class: 'text-right font-medium' }, price);
+      },
     },
     {
-      accessorKey: 'amount',
-      header: () => h('div', { class: 'text-right' }, 'Amount'),
+      accessorKey: 'tags',
+      header: 'Etiquetas',
       cell: ({ row }) => {
-        const amount = Number.parseFloat(row.getValue('amount'));
-        const formatted = new Intl.NumberFormat('es-CO', {
-          style: 'currency',
-          currency: 'COP',
-        }).format(amount);
-        return h('div', { class: 'text-right font-medium' }, formatted);
+        const tags = row.getValue('tags') as string[];
+        return h(
+          'div',
+          { class: 'flex flex-wrap gap-1' },
+          tags.map((tag) => h(UBadge, { label: tag, color: 'primary', variant: 'subtle' }))
+        );
+      },
+    },
+    {
+      accessorKey: 'createdAt',
+      header: 'Creado',
+      cell: ({ row }) => {
+        const date = new Date(row.getValue('createdAt'));
+        return h('div', { class: 'text-right' }, formatDate(date));
       },
     },
   ];
@@ -115,6 +83,8 @@
       <UButton icon="i-lucide-plus" label="Agregar Producto" color="primary" size="lg" />
     </div>
 
-    <UTable :data="data" :columns="columns" class="flex-1" />
+    <UTable sticky :data="products" :columns="columns" class="flex-1" />
+
+    <SharedPagination :total="total" :model-value="currentPage" :per-page="perPage" />
   </div>
 </template>
